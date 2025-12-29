@@ -1,0 +1,61 @@
+{
+	"name": "@makingchatbots/n8n-nodes-genesys-cloud",
+	"version": "0.1.0",
+	"description": "n8n node for interacting with Genesys Cloud's Platform API",
+	"license": "MIT",
+	"homepage": "https://makingchatbots.com",
+	"keywords": [
+		"n8n-community-node-package",
+		"genesys-cloud"
+	],
+	"author": {
+		"name": "Lucas Woodward",
+		"email": "31957045+SketchingDev@users.noreply.github.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/MakingChatbots/n8n-nodes-genesys-cloud.git"
+	},
+	"bugs": {
+		"url": "https://github.com/MakingChatbots/n8n-nodes-genesys-cloud/issues"
+	},
+	"scripts": {
+		"build": "n8n-node build",
+		"build:watch": "tsc --watch",
+		"dev": "n8n-node dev",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"release": "n8n-node release",
+		"test": "jest",
+		"prepublishOnly": "n8n-node prerelease"
+	},
+	"files": [
+		"dist"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"strict": true,
+		"credentials": [
+			"dist/credentials/GenesysCloudPlatformApiOAuth2Api.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/GenesysCloud/GenesysCloud.node.js"
+		]
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "*",
+		"@types/jest": "^30.0.0",
+		"axios": "^1.13.2",
+		"dotenv": "^17.2.3",
+		"eslint": "9.39.2",
+		"jest": "^30.2.0",
+		"prettier": "3.7.4",
+		"release-it": "^19.2.2",
+		"ts-jest": "^29.4.6",
+		"ts-node": "^10.9.2",
+		"typescript": "5.9.3"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	}
+}

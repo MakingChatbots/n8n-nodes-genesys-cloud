@@ -29,7 +29,6 @@ jobs:
 
       - name: Build
         run: |
-          npm run clean
           npm run build
 
       - id: publish

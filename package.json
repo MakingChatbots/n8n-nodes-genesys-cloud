@@ -1,12 +1,15 @@
 {
 	"name": "@makingchatbots/n8n-nodes-genesys-cloud",
-	"version": "0.1.3",
+	"version": "1.0.0",
 	"description": "n8n node for interacting with Genesys Cloud's Platform API",
 	"license": "MIT",
 	"homepage": "https://makingchatbots.com",
 	"keywords": [
 		"n8n-community-node-package",
-		"genesys-cloud"
+		"genesys-cloud",
+		"genesys cloud",
+		"genesys cloud n8n",
+		"platform api n8n"
 	],
 	"author": {
 		"name": "Lucas Woodward",

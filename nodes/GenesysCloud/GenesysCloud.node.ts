@@ -13,6 +13,8 @@ import { conversationFields, conversationOperations } from './ConversationDescri
 import { conversationOperation } from './ConversationOperation';
 import { groupFields, groupOperations } from './GroupDescription';
 import { groupOperation } from './GroupOperation';
+import { divisionFields, divisionOperations } from './DivisionDescription';
+import { divisionOperation } from './DivisionOperation';
 
 export class GenesysCloud implements INodeType {
 	description: INodeTypeDescription = {
@@ -65,6 +67,21 @@ export class GenesysCloud implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
+						name: 'Conversation',
+						value: 'conversation',
+						description: 'A conversation in the system',
+					},
+					{
+						name: 'Division',
+						value: 'division',
+						description: 'A division in the system',
+					},
+					{
+						name: 'Group',
+						value: 'group',
+						description: 'A group in the system',
+					},
+					{
 						name: 'Queue',
 						value: 'queue',
 						description:
@@ -75,16 +92,6 @@ export class GenesysCloud implements INodeType {
 						value: 'user',
 						description: 'A user in the system',
 					},
-					{
-						name: 'Conversation',
-						value: 'conversation',
-						description: 'A conversation in the system',
-					},
-					{
-						name: 'Group',
-						value: 'group',
-						description: 'A group in the system',
-					},
 				],
 				default: 'queue',
 			},
@@ -92,10 +99,12 @@ export class GenesysCloud implements INodeType {
 			...userOperations,
 			...conversationOperations,
 			...groupOperations,
+			...divisionOperations,
 			...queueFields,
 			...userFields,
 			...conversationFields,
 			...groupFields,
+			...divisionFields,
 		],
 	};
 
@@ -126,6 +135,11 @@ export class GenesysCloud implements INodeType {
 					case 'group': {
 						const groupResults = await groupOperation.call(this, itemIndex);
 						returnData.push(...groupResults);
+						break;
+					}
+					case 'division': {
+						const divisionResults = await divisionOperation.call(this, itemIndex);
+						returnData.push(...divisionResults);
 						break;
 					}
 				}

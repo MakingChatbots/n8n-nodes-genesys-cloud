@@ -7,7 +7,9 @@ export async function queueOperation(
 ): Promise<INodeExecutionData[]> {
 	const operation = this.getNodeParameter('operation', index) as string;
 
-	if (operation === 'get') {
+	if (operation === 'create') {
+		return create.call(this, index);
+	} else if (operation === 'get') {
 		return get.call(this, index);
 	} else if (operation === 'getAll') {
 		return getAll.call(this, index);
@@ -16,6 +18,36 @@ export async function queueOperation(
 	}
 
 	return [];
+}
+
+async function create(this: IExecuteFunctions, index: number): Promise<INodeExecutionData[]> {
+	const name = this.getNodeParameter('name', index) as string;
+	const body: IDataObject = {
+		name,
+	};
+	const description = this.getNodeParameter('description', index) as string;
+	if (description) {
+		body.description = description;
+	}
+	const divisionId = this.getNodeParameter('divisionId', index) as string;
+	if (divisionId) {
+		body.division = { id: divisionId };
+	}
+
+	const additionalFields = this.getNodeParameter('additionalFields', index) as IDataObject;
+	Object.assign(body, additionalFields);
+
+	const responseData = await genesysCloudApiRequest.call(
+		this,
+		'POST',
+		'/api/v2/routing/queues',
+		body,
+	);
+
+	return this.helpers.constructExecutionMetaData(
+		this.helpers.returnJsonArray(responseData as IDataObject[]),
+		{ itemData: { item: index } },
+	);
 }
 
 async function get(this: IExecuteFunctions, index: number): Promise<INodeExecutionData[]> {

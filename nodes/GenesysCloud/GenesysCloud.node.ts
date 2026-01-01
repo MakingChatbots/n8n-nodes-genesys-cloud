@@ -67,6 +67,21 @@ export class GenesysCloud implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
+						name: 'Conversation',
+						value: 'conversation',
+						description: 'A conversation in the system',
+					},
+					{
+						name: 'Division',
+						value: 'division',
+						description: 'A division in the system',
+					},
+					{
+						name: 'Group',
+						value: 'group',
+						description: 'A group in the system',
+					},
+					{
 						name: 'Queue',
 						value: 'queue',
 						description:
@@ -76,21 +91,6 @@ export class GenesysCloud implements INodeType {
 						name: 'User',
 						value: 'user',
 						description: 'A user in the system',
-					},
-					{
-						name: 'Conversation',
-						value: 'conversation',
-						description: 'A conversation in the system',
-					},
-					{
-						name: 'Group',
-						value: 'group',
-						description: 'A group in the system',
-					},
-					{
-						name: 'Division',
-						value: 'division',
-						description: 'A division in the system',
 					},
 				],
 				default: 'queue',

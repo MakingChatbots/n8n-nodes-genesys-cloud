@@ -13,6 +13,12 @@ export const queueOperations: INodeProperties[] = [
 		},
 		options: [
 			{
+				name: 'Create',
+				value: 'create',
+				description: 'Create a queue',
+				action: 'Create a queue',
+			},
+			{
 				name: 'Get',
 				value: 'get',
 				description: 'Get an queues',
@@ -36,6 +42,242 @@ export const queueOperations: INodeProperties[] = [
 ];
 
 export const queueFields: INodeProperties[] = [
+	/* -------------------------------------------------------------------------- */
+	/*                                  queue:create                              */
+	/* -------------------------------------------------------------------------- */
+	{
+		displayName: 'Name',
+		name: 'name',
+		type: 'string',
+		required: true,
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['queue'],
+				operation: ['create'],
+			},
+		},
+		description: 'The queue name',
+	},
+	{
+		displayName: 'Description',
+		name: 'description',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['queue'],
+				operation: ['create'],
+			},
+		},
+		description: 'The queue description',
+	},
+	{
+		displayName: 'Division ID',
+		name: 'divisionId',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['queue'],
+				operation: ['create'],
+			},
+		},
+		description: 'The division ID to which this queue will belong',
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['queue'],
+				operation: ['create'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Agent Owned Routing',
+				name: 'agentOwnedRouting',
+				type: 'json',
+				default: '',
+				description: 'Agent owned routing settings',
+			},
+			{
+				displayName: 'Auto Answer Only',
+				name: 'autoAnswerOnly',
+				type: 'boolean',
+				default: true,
+				description: 'Whether to only allow auto-answer',
+			},
+			{
+				displayName: 'Bullseye',
+				name: 'bullseye',
+				type: 'json',
+				default: '',
+				description: 'Bullseye routing settings',
+			},
+			{
+				displayName: 'Canned Response Libraries',
+				name: 'cannedResponseLibraries',
+				type: 'json',
+				default: '',
+				description: 'Canned response libraries settings',
+			},
+			{
+				displayName: 'Conditional Group Routing',
+				name: 'conditionalGroupRouting',
+				type: 'json',
+				default: '',
+				description: 'Conditional group routing settings',
+			},
+			{
+				displayName: 'Default Scripts',
+				name: 'defaultScripts',
+				type: 'json',
+				default: '',
+				description: 'Default scripts settings',
+			},
+			{
+				displayName: 'Direct Routing',
+				name: 'directRouting',
+				type: 'json',
+				default: '',
+				description: 'Direct routing settings',
+			},
+			{
+				displayName: 'Email In Queue Flow',
+				name: 'emailInQueueFlow',
+				type: 'string',
+				default: '',
+				description: 'ID of the in-queue flow for email',
+			},
+			{
+				displayName: 'Enable Audio Monitoring',
+				name: 'enableAudioMonitoring',
+				type: 'boolean',
+				default: true,
+				description: 'Whether to enable audio monitoring',
+			},
+			{
+				displayName: 'Enable Manual Assignment',
+				name: 'enableManualAssignment',
+				type: 'boolean',
+				default: true,
+				description: 'Whether to enable manual assignment',
+			},
+			{
+				displayName: 'Enable Transcription',
+				name: 'enableTranscription',
+				type: 'boolean',
+				default: true,
+				description: 'Whether to enable transcription',
+			},
+			{
+				displayName: 'Media Settings',
+				name: 'mediaSettings',
+				type: 'json',
+				default: '',
+			},
+			{
+				displayName: 'Message In Queue Flow',
+				name: 'messageInQueueFlow',
+				type: 'string',
+				default: '',
+				description: 'ID of the in-queue flow for messages',
+			},
+			{
+				displayName: 'On Hold Prompt',
+				name: 'onHoldPrompt',
+				type: 'string',
+				default: '',
+				description: 'ID of the on-hold prompt',
+			},
+			{
+				displayName: 'Outbound Email Address',
+				name: 'outboundEmailAddress',
+				type: 'json',
+				default: '',
+				description: 'Outbound email address settings',
+			},
+			{
+				displayName: 'Outbound Messaging Addresses',
+				name: 'outboundMessagingAddresses',
+				type: 'json',
+				default: '',
+				description: 'Outbound messaging addresses settings',
+			},
+			{
+				displayName: 'Queue Flow',
+				name: 'queueFlow',
+				type: 'string',
+				default: '',
+				description: 'ID of the queue flow',
+			},
+			{
+				displayName: 'Routing Rules',
+				name: 'routingRules',
+				type: 'json',
+				default: '[]',
+				description: 'The routing rules for the queue',
+			},
+			{
+				displayName: 'Scoring Method',
+				name: 'scoringMethod',
+				type: 'options',
+				options: [
+					{
+						name: 'Timestamp And Priority',
+						value: 'TimestampAndPriority',
+					},
+					{
+						name: 'Priority Only',
+						value: 'PriorityOnly',
+					},
+				],
+				default: 'TimestampAndPriority',
+				description: 'The scoring method for the queue',
+			},
+			{
+				displayName: 'Skill Evaluation Method',
+				name: 'skillEvaluationMethod',
+				type: 'options',
+				options: [
+					{
+						name: 'None',
+						value: 'NONE',
+					},
+					{
+						name: 'Best',
+						value: 'BEST',
+					},
+					{
+						name: 'All',
+						value: 'ALL',
+					},
+				],
+				default: 'NONE',
+				description: 'The skill evaluation method for the queue',
+			},
+			{
+				displayName: 'Suppress In Queue Call Recording',
+				name: 'suppressInQueueCallRecording',
+				type: 'boolean',
+				default: true,
+				description: 'Whether to suppress call recording in queue',
+			},
+			{
+				displayName: 'Whisper Prompt',
+				name: 'whisperPrompt',
+				type: 'string',
+				default: '',
+				description: 'ID of the whisper prompt',
+			},
+		],
+	},
+
 	/* -------------------------------------------------------------------------- */
 	/*                                  queue:get                                 */
 	/* -------------------------------------------------------------------------- */

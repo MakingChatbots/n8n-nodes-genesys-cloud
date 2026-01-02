@@ -13,7 +13,7 @@ export async function genesysCloudApiRequest(
 	this: IExecuteFunctions | ILoadOptionsFunctions | IPollFunctions,
 	method: IHttpRequestMethods,
 	resource: string,
-	body: IDataObject = {},
+	body: IDataObject | IDataObject[] = {},
 	query: IDataObject = {},
 ) {
 	const credentials = await this.getCredentials('genesysCloudPlatformApiOAuth2Api');

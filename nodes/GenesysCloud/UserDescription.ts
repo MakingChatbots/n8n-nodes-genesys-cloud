@@ -24,6 +24,12 @@ export const userOperations: INodeProperties[] = [
 				description: 'Get many users',
 				action: 'Get many users',
 			},
+			{
+				name: 'Get Queues',
+				value: 'getQueues',
+				description: 'Get queues for a user',
+				action: 'Get queues for a user',
+			},
 		],
 		default: 'get',
 	},
@@ -42,7 +48,7 @@ export const userFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['user'],
-				operation: ['get'],
+				operation: ['get', 'getQueues'],
 			},
 		},
 		description: 'The ID of the user',
@@ -58,7 +64,7 @@ export const userFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['user'],
-				operation: ['getAll'],
+				operation: ['getAll', 'getQueues'],
 			},
 		},
 		default: false,
@@ -71,7 +77,7 @@ export const userFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['user'],
-				operation: ['getAll'],
+				operation: ['getAll', 'getQueues'],
 				returnAll: [false],
 			},
 		},

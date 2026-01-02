@@ -34,6 +34,20 @@ export async function userOperation(
 			qs,
 			limit,
 		);
+	} else if (operation === 'getQueues') {
+		const userId = this.getNodeParameter('userId', index) as string;
+		const returnAll = this.getNodeParameter('returnAll', index) as boolean;
+		const limit = returnAll ? 0 : (this.getNodeParameter('limit', index) as number);
+
+		responseData = await genesysCloudApiRequestAllItems.call(
+			this,
+			'entities',
+			'GET',
+			`/api/v2/users/${userId}/queues`,
+			{},
+			qs,
+			limit,
+		);
 	}
 
 	return this.helpers.constructExecutionMetaData(

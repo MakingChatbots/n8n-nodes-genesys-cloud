@@ -15,6 +15,8 @@ export async function queueOperation(
 		return getAll.call(this, index);
 	} else if (operation === 'getMembers') {
 		return getMembers.call(this, index);
+	} else if (operation === 'addMembers') {
+		return addMembers.call(this, index);
 	}
 
 	return [];
@@ -114,6 +116,33 @@ export async function getMembers(
 		{},
 		qs,
 		limit,
+	);
+
+	return this.helpers.constructExecutionMetaData(
+		this.helpers.returnJsonArray(responseData as IDataObject[]),
+		{ itemData: { item: index } },
+	);
+}
+
+export async function addMembers(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData[]> {
+	const queueId = this.getNodeParameter('queueId', index) as string;
+	const userIds = this.getNodeParameter('userIds', index) as string | string[];
+
+	let members: IDataObject[] = [];
+	if (Array.isArray(userIds)) {
+		members = userIds.map((id) => ({ id: id.trim() }));
+	} else {
+		members = userIds.split(',').map((id) => ({ id: id.trim() }));
+	}
+
+	const responseData = await genesysCloudApiRequest.call(
+		this,
+		'POST',
+		`/api/v2/routing/queues/${queueId}/members`,
+		members,
 	);
 
 	return this.helpers.constructExecutionMetaData(

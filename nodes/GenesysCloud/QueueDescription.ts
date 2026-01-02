@@ -13,6 +13,12 @@ export const queueOperations: INodeProperties[] = [
 		},
 		options: [
 			{
+				name: 'Add Members',
+				value: 'addMembers',
+				description: 'Add members to a queue',
+				action: 'Add members to a queue',
+			},
+			{
 				name: 'Create',
 				value: 'create',
 				description: 'Create a queue',
@@ -35,12 +41,6 @@ export const queueOperations: INodeProperties[] = [
 				value: 'getMembers',
 				description: 'Get members of a queue',
 				action: 'Get members of a queue',
-			},
-			{
-				name: 'Add Members',
-				value: 'addMembers',
-				description: 'Add members to a queue',
-				action: 'Add members to a queue',
 			},
 		],
 		default: 'get',

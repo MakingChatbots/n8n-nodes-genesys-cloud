@@ -36,6 +36,12 @@ export const queueOperations: INodeProperties[] = [
 				description: 'Get members of a queue',
 				action: 'Get members of a queue',
 			},
+			{
+				name: 'Add Members',
+				value: 'addMembers',
+				description: 'Add members to a queue',
+				action: 'Add members to a queue',
+			},
 		],
 		default: 'get',
 	},
@@ -290,7 +296,7 @@ export const queueFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['queue'],
-				operation: ['get', 'getMembers'],
+				operation: ['get', 'getMembers', 'addMembers'],
 			},
 		},
 		description: 'ID of queue that needs to be fetched',
@@ -545,5 +551,22 @@ export const queueFields: INodeProperties[] = [
 				description: 'Which fields, if any, to expand',
 			},
 		],
+	},
+	/* -------------------------------------------------------------------------- */
+	/*                               queue:addMembers                             */
+	/* -------------------------------------------------------------------------- */
+	{
+		displayName: 'User IDs',
+		name: 'userIds',
+		type: 'string',
+		required: true,
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['queue'],
+				operation: ['addMembers'],
+			},
+		},
+		description: 'Comma-separated list or Array of user IDs to add to the queue',
 	},
 ];

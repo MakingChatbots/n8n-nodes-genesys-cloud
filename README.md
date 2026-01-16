@@ -12,7 +12,8 @@ An n8n community node for [Genesys Cloud's Platform API](https://developer.genes
 2. Click **Community nodes**
 3. Click **Install a community node**
 4. Under **npm Package name** put `@makingchatbots/n8n-nodes-genesys-cloud`
-5. Check _**I understand the risks...**_
+5. Check _**'I understand the risks...'**_
+6. Click **Install**
 
 More detailed [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) is in the n8n community nodes documentation.
 

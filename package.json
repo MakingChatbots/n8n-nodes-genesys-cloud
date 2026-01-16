@@ -1,6 +1,6 @@
 {
 	"name": "@makingchatbots/n8n-nodes-genesys-cloud",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "n8n node for interacting with Genesys Cloud's Platform API",
 	"license": "MIT",
 	"homepage": "https://makingchatbots.com",

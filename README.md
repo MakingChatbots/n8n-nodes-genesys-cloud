@@ -39,21 +39,23 @@ In n8n:
 
 This node supports the following operations:
 
-### Conversation
-*   **Get**: Get a specific conversation by ID.
-*   **Get Many**: Retrieve a list of conversations with filters (e.g., by Interval).
 
-### Group
-*   **Get**: Get a specific group by ID.
-*   **Get Many**: Retrieve a list of groups.
-
-### Queue
-*   **Get**: Get a specific queue by ID.
-*   **Get Many**: Retrieve a list of queues.
-
-### User
-*   **Get**: Get a specific user by ID.
-*   **Get Many**: Retrieve a list of users.
+| Resource | Operation | Description |
+| :--- | :--- | :--- |
+| **Conversation** | Get | Get a conversation |
+| | Get Many | Get many active conversations |
+| **Division** | Get | Get a division |
+| | Get Many | Get many divisions |
+| **Group** | Get | Get a group |
+| | Get Many | Get many groups |
+| **Queue** | Add Members | Add members to a queue |
+| | Create | Create a queue |
+| | Get | Get a queue |
+| | Get Many | Get many queues |
+| | Get Members | Get members of a queue |
+| **User** | Get | Get a user |
+| | Get Many | Get many users |
+| | Get Queues | Get queues for a user |
 
 ## Resources
 

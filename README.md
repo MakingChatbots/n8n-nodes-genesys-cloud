@@ -1,12 +1,21 @@
 # Genesys Cloud Node for n8n
+[![npm](https://img.shields.io/npm/v/@makingchatbots/n8n-nodes-genesys-cloud)](https://www.npmjs.com/package/@makingchatbots/n8n-nodes-genesys-cloud)
+[![Follow me on LinkedIn for updates](https://img.shields.io/badge/Follow%20for%20updates-LinkedIn-blue)](https://www.linkedin.com/in/lucas-woodward-the-dev/)
 
 An n8n community node for [Genesys Cloud's Platform API](https://developer.genesys.cloud/platform/api/).
 
-[n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/sustainable-use-license/) workflow automation platform.
+<img width="3018" height="1325" alt="image" src="https://github.com/user-attachments/assets/2be20ca1-9adb-4e62-a776-1cc34ea7f799" />
 
 ## Installation
 
-Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
+1. Expand **Settings**
+2. Click **Community nodes**
+3. Click **Install a community node**
+4. Under **npm Package name** put `@makingchatbots/n8n-nodes-genesys-cloud`
+5. Check _**'I understand the risks...'**_
+6. Click **Install**
+
+More detailed [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) is in the n8n community nodes documentation.
 
 ## Credentials
 

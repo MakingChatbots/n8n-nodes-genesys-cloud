@@ -13,10 +13,7 @@ describe('GenesysCloud Node', () => {
 
 	describe('Error Handling', () => {
 		const mockExecuteFunctions = (continueOnFail: boolean) => {
-			const inputData = [
-				{ json: { test: 'data1' } },
-				{ json: { test: 'data2' } },
-			];
+			const inputData = [{ json: { test: 'data1' } }, { json: { test: 'data2' } }];
 			return {
 				getInputData: jest.fn().mockImplementation((index?: number) => {
 					if (index !== undefined) {
@@ -24,7 +21,7 @@ describe('GenesysCloud Node', () => {
 					}
 					return inputData;
 				}),
-				getNodeParameter: jest.fn().mockImplementation((paramName: string, index: number) => {
+				getNodeParameter: jest.fn().mockImplementation((paramName: string) => {
 					if (paramName === 'resource') return 'queue';
 					if (paramName === 'operation') return 'get';
 					return undefined;
@@ -93,7 +90,9 @@ describe('GenesysCloud Node', () => {
 
 		it('should preserve error context when re-throwing', async () => {
 			const mockFunctions = mockExecuteFunctions(false);
-			const testError = new Error('API request failed') as Error & { context?: { itemIndex?: number } };
+			const testError = new Error('API request failed') as Error & {
+				context?: { itemIndex?: number };
+			};
 			testError.context = { itemIndex: 5 };
 
 			jest.spyOn(QueueOperation, 'queueOperation').mockRejectedValue(testError);
@@ -106,7 +105,7 @@ describe('GenesysCloud Node', () => {
 		const mockExecuteFunctions = (resource: string, operation: string) => {
 			return {
 				getInputData: jest.fn().mockReturnValue([{ json: { test: 'data' } }]),
-				getNodeParameter: jest.fn().mockImplementation((paramName: string, index: number) => {
+				getNodeParameter: jest.fn().mockImplementation((paramName: string) => {
 					if (paramName === 'resource') return resource;
 					if (paramName === 'operation') return operation;
 					return undefined;

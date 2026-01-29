@@ -26,7 +26,7 @@ async function get(this: IExecuteFunctions, index: number): Promise<INodeExecuti
     );
 
     return this.helpers.constructExecutionMetaData(
-        this.helpers.returnJsonArray(responseData as IDataObject[]),
+        this.helpers.returnJsonArray(responseData as IDataObject | IDataObject[]),
         { itemData: { item: index } },
     );
 }
@@ -59,7 +59,7 @@ export async function getAll(
     );
 
     return this.helpers.constructExecutionMetaData(
-        this.helpers.returnJsonArray(responseData as IDataObject[]),
+        this.helpers.returnJsonArray(responseData as IDataObject | IDataObject[]),
         { itemData: { item: index } },
     );
 }

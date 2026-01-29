@@ -1,4 +1,4 @@
-import { IDataObject, IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
+import { IDataObject, IExecuteFunctions, INodeExecutionData, NodeOperationError } from 'n8n-workflow';
 import { genesysCloudApiRequest, genesysCloudApiRequestAllItems } from './GenericFunctions';
 
 export async function conversationOperation(
@@ -23,6 +23,36 @@ export async function conversationOperation(
 		const limit = returnAll ? 0 : (this.getNodeParameter('limit', index) as number);
 		const startDate = this.getNodeParameter('startDate', index) as string;
 		const endDate = this.getNodeParameter('endDate', index) as string;
+
+		// Validate date formats
+		const startDateTime = new Date(startDate);
+		const endDateTime = new Date(endDate);
+
+		if (isNaN(startDateTime.getTime())) {
+			throw new NodeOperationError(
+				this.getNode(),
+				`Invalid start date format: "${startDate}". Please provide a valid ISO 8601 date string (e.g., 2024-01-01T00:00:00Z).`,
+				{ itemIndex: index },
+			);
+		}
+
+		if (isNaN(endDateTime.getTime())) {
+			throw new NodeOperationError(
+				this.getNode(),
+				`Invalid end date format: "${endDate}". Please provide a valid ISO 8601 date string (e.g., 2024-01-31T23:59:59Z).`,
+				{ itemIndex: index },
+			);
+		}
+
+		// Validate date range
+		if (startDateTime >= endDateTime) {
+			throw new NodeOperationError(
+				this.getNode(),
+				`Start date (${startDate}) must be before end date (${endDate}).`,
+				{ itemIndex: index },
+			);
+		}
+
 		const interval = `${startDate}/${endDate}`;
 		const options = this.getNodeParameter('options', index) as IDataObject;
 
@@ -80,7 +110,7 @@ export async function conversationOperation(
 	}
 
 	return this.helpers.constructExecutionMetaData(
-		this.helpers.returnJsonArray(responseData as IDataObject[]),
+		this.helpers.returnJsonArray(responseData as IDataObject | IDataObject[]),
 		{ itemData: { item: index } },
 	);
 }

@@ -1,4 +1,4 @@
-import { IDataObject, IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
+import { IDataObject, IExecuteFunctions, INodeExecutionData, NodeOperationError } from 'n8n-workflow';
 import { genesysCloudApiRequest, genesysCloudApiRequestAllItems } from './GenericFunctions';
 
 export async function queueOperation(
@@ -62,7 +62,7 @@ async function get(this: IExecuteFunctions, index: number): Promise<INodeExecuti
 	);
 
 	return this.helpers.constructExecutionMetaData(
-		this.helpers.returnJsonArray(responseData as IDataObject[]),
+		this.helpers.returnJsonArray(responseData as IDataObject),
 		{ itemData: { item: index } },
 	);
 }
@@ -131,12 +131,42 @@ export async function addMembers(
 	const queueId = this.getNodeParameter('queueId', index) as string;
 	const userIds = this.getNodeParameter('userIds', index) as string | string[];
 
-	let members: IDataObject[] = [];
-	if (Array.isArray(userIds)) {
-		members = userIds.map((id) => ({ id: id.trim() }));
-	} else {
-		members = userIds.split(',').map((id) => ({ id: id.trim() }));
+	// UUID format validation (Genesys Cloud uses UUIDs for IDs)
+	const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+	// Parse and validate user IDs
+	const userIdList = Array.isArray(userIds)
+		? userIds.map((id) => id.trim())
+		: userIds.split(',').map((id) => id.trim());
+
+	// Filter out empty strings
+	const validUserIds = userIdList.filter((id) => id.length > 0);
+
+	if (validUserIds.length === 0) {
+		throw new NodeOperationError(
+			this.getNode(),
+			'No valid user IDs provided. Please provide at least one user ID.',
+			{ itemIndex: index },
+		);
 	}
+
+	// Validate each user ID format
+	const invalidIds: string[] = [];
+	validUserIds.forEach((id) => {
+		if (!uuidRegex.test(id)) {
+			invalidIds.push(id);
+		}
+	});
+
+	if (invalidIds.length > 0) {
+		throw new NodeOperationError(
+			this.getNode(),
+			`Invalid user ID format: ${invalidIds.join(', ')}. User IDs must be in UUID format (e.g., 12345678-1234-1234-1234-123456789012).`,
+			{ itemIndex: index },
+		);
+	}
+
+	const members: IDataObject[] = validUserIds.map((id) => ({ id }));
 
 	const responseData = await genesysCloudApiRequest.call(
 		this,

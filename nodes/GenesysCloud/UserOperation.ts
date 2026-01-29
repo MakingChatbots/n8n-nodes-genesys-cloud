@@ -51,7 +51,7 @@ export async function userOperation(
 	}
 
 	return this.helpers.constructExecutionMetaData(
-		this.helpers.returnJsonArray(responseData as IDataObject[]),
+		this.helpers.returnJsonArray(responseData as IDataObject | IDataObject[]),
 		{ itemData: { item: index } },
 	);
 }

@@ -48,6 +48,8 @@ This node supports the following operations:
 | | Get Many | Get many divisions |
 | **Group** | Get | Get a group |
 | | Get Many | Get many groups |
+| **OAuth Client** | Get | Get an OAuth client |
+| | Get Many | Get many OAuth clients |
 | **Queue** | Add Members | Add members to a queue |
 | | Create | Create a queue |
 | | Get | Get a queue |

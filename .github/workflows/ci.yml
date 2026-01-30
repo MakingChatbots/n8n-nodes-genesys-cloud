@@ -2,7 +2,6 @@ name: CI
 
 on:
   pull_request:
-  push:
     branches:
       - main
 
@@ -22,7 +21,16 @@ jobs:
         run: 'npm ci'
 
       - name: Run lint
-        run: 'npm run lint'
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
 
       - name: Run build
-        run: 'npm run build'
+        run: npm run build
+
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/lcov.info
+          fail_ci_if_error: false

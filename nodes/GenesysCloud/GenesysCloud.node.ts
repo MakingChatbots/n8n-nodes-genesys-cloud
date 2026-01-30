@@ -15,6 +15,8 @@ import { groupFields, groupOperations } from './GroupDescription';
 import { groupOperation } from './GroupOperation';
 import { divisionFields, divisionOperations } from './DivisionDescription';
 import { divisionOperation } from './DivisionOperation';
+import { oauthClientFields, oauthClientOperations } from './OAuthClientDescription';
+import { oauthClientOperation } from './OAuthClientOperation';
 
 export class GenesysCloud implements INodeType {
 	description: INodeTypeDescription = {
@@ -78,6 +80,11 @@ export class GenesysCloud implements INodeType {
 						description: 'A group in the system',
 					},
 					{
+						name: 'OAuth Client',
+						value: 'oauthClient',
+						description: 'An OAuth client in the system',
+					},
+					{
 						name: 'Queue',
 						value: 'queue',
 						description:
@@ -96,11 +103,13 @@ export class GenesysCloud implements INodeType {
 			...conversationOperations,
 			...groupOperations,
 			...divisionOperations,
+			...oauthClientOperations,
 			...queueFields,
 			...userFields,
 			...conversationFields,
 			...groupFields,
 			...divisionFields,
+			...oauthClientFields,
 		],
 	};
 
@@ -136,6 +145,11 @@ export class GenesysCloud implements INodeType {
 					case 'division': {
 						const divisionResults = await divisionOperation.call(this, itemIndex);
 						returnData.push(...divisionResults);
+						break;
+					}
+					case 'oauthClient': {
+						const oauthClientResults = await oauthClientOperation.call(this, itemIndex);
+						returnData.push(...oauthClientResults);
 						break;
 					}
 				}

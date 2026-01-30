@@ -50,6 +50,7 @@ This node supports the following operations:
 | | Get Many | Get many groups |
 | **OAuth Client** | Get | Get an OAuth client |
 | | Get Many | Get many OAuth clients |
+| | Get Usage | Get usage statistics for an OAuth client |
 | **Queue** | Add Members | Add members to a queue |
 | | Create | Create a queue |
 | | Get | Get a queue |

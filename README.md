@@ -44,6 +44,9 @@ This node supports the following operations:
 | :--- | :--- | :--- |
 | **Conversation** | Get | Get a conversation |
 | | Get Many | Get many active conversations |
+| **Data Action** | Get | Get a data action |
+| | Get Many | Get many data actions |
+| | Get Integrations | Get integrations for filtering data actions |
 | **Division** | Get | Get a division |
 | | Get Many | Get many divisions |
 | **Group** | Get | Get a group |

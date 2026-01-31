@@ -17,6 +17,8 @@ import { divisionFields, divisionOperations } from './DivisionDescription';
 import { divisionOperation } from './DivisionOperation';
 import { oauthClientFields, oauthClientOperations } from './OAuthClientDescription';
 import { oauthClientOperation } from './OAuthClientOperation';
+import { dataActionFields, dataActionOperations } from './DataActionDescription';
+import { dataActionOperation } from './DataActionOperation';
 
 export class GenesysCloud implements INodeType {
 	description: INodeTypeDescription = {
@@ -70,6 +72,11 @@ export class GenesysCloud implements INodeType {
 						description: 'A conversation in the system',
 					},
 					{
+						name: 'Data Action',
+						value: 'dataAction',
+						description: 'A data action for integration with external systems',
+					},
+					{
 						name: 'Division',
 						value: 'division',
 						description: 'A division in the system',
@@ -101,12 +108,14 @@ export class GenesysCloud implements INodeType {
 			...queueOperations,
 			...userOperations,
 			...conversationOperations,
+			...dataActionOperations,
 			...groupOperations,
 			...divisionOperations,
 			...oauthClientOperations,
 			...queueFields,
 			...userFields,
 			...conversationFields,
+			...dataActionFields,
 			...groupFields,
 			...divisionFields,
 			...oauthClientFields,
@@ -135,6 +144,11 @@ export class GenesysCloud implements INodeType {
 					case 'conversation': {
 						const conversationResults = await conversationOperation.call(this, itemIndex);
 						returnData.push(...conversationResults);
+						break;
+					}
+					case 'dataAction': {
+						const dataActionResults = await dataActionOperation.call(this, itemIndex);
+						returnData.push(...dataActionResults);
 						break;
 					}
 					case 'group': {

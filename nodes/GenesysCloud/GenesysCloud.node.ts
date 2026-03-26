@@ -94,8 +94,7 @@ export class GenesysCloud implements INodeType {
 					{
 						name: 'Queue',
 						value: 'queue',
-						description:
-							'Represents an individual queue, which is an organization or person involved with your business (such as customers, competitors, and partners)',
+						description: 'A queue in the system',
 					},
 					{
 						name: 'User',
@@ -169,7 +168,11 @@ export class GenesysCloud implements INodeType {
 				}
 			} catch (error) {
 				if (this.continueOnFail()) {
-					returnData.push({ json: this.getInputData(itemIndex)[0].json, error, pairedItem: itemIndex });
+					returnData.push({
+						json: this.getInputData(itemIndex)[0].json,
+						error,
+						pairedItem: itemIndex,
+					});
 				} else {
 					if (error.context) {
 						error.context.itemIndex = itemIndex;

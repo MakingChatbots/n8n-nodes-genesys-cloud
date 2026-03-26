@@ -27,7 +27,7 @@ export const queueOperations: INodeProperties[] = [
 			{
 				name: 'Get',
 				value: 'get',
-				description: 'Get an queues',
+				description: 'Get a queue',
 				action: 'Get a queue',
 			},
 			{
